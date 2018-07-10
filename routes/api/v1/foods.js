@@ -4,7 +4,7 @@ var router = express.Router();
 const Food = require('../../../models/food.js')
 
 /* GET foods listing. */
-router.get('/foods', function(req, res, next) {
+router.get('/', function(req, res, next) {
   Food.all()
   .then((data) => {
     res.status(201).json(data.rows)
