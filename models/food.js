@@ -15,12 +15,12 @@ const find = (food_id) => {
   );
 };
 
-const create = (attritubtes) => {
-  var name = attributes.name;
-  var calories = attributes.calories;
+const create = (attributes) => {
+  let name = attributes.name;
+  let calories = attributes.calories;
 
   return database.raw(
-    'INSERT INTO foods (name, calories) VALUES (?, ?) RETURNING id, name, calories;', name, calories
+    'INSERT INTO foods (name, calories) VALUES (?, ?) RETURNING id, name, calories;', [name, calories]
   );
 };
 
