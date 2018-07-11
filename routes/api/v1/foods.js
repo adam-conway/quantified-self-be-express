@@ -42,7 +42,7 @@ router.put('/:id', function(req, res, next) {
   })
 });
 
-/* UPDATE food. */
+/* DELETE food. */
 router.delete('/:id', function(req, res, next) {
   var id = req.params.id;
 
