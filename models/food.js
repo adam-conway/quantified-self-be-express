@@ -33,6 +33,12 @@ const update = (attributes, id) => {
   );
 };
 
+const remove = (id) => {
+  return database.raw(
+    'DELETE FROM foods WHERE id = ? RETURNING id, name, calories;', id
+  );
+};
+
 module.exports = {
-  all, find, create, update
+  all, find, create, update, remove
 }
