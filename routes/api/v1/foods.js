@@ -21,4 +21,14 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
+/* POST food. */
+router.post('/', function(req, res, next) {
+  var attributes = req.body.food;
+
+  Food.create(attributes)
+  .then((data) => {
+    res.status(200).json(data.rows)
+  })
+});
+
 module.exports = router;
