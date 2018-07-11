@@ -14,20 +14,19 @@ const all = () => {
 };
 
 
-// return database.raw(`SELECT meals.*,
-//                          json_agg(foods.*) FILTER (WHERE foods.id IS NOT NULL) AS foods
-//                          FROM meals
-//                          LEFT JOIN meal_foods ON meals.id = meal_foods.meal_id
-//                          LEFT JOIN foods ON meal_foods.food_id = foods.id
-//                          GROUP BY meals.id;`)
-  // }
-//
-// const find = (food_id) => {
-//   var food_id = food_id;
-//   return database.raw(
-//     'SELECT foods.id, foods.name, foods.calories FROM foods WHERE foods.id = ?;', food_id
-//   );
-// };
+const find = (meal_id) => {
+  var meal_id = meal_id;
+  return database.raw(
+    `SELECT meals.*,
+        json_agg(foods.*) FILTER (WHERE foods.id IS NOT NULL) AS foods
+        FROM meals
+        LEFT JOIN meal_foods ON meals.id = meal_foods.meal_id
+        LEFT JOIN foods ON meal_foods.food_id = foods.id
+        WHERE meals.id = ?
+        GROUP BY meals.id;`,
+        meal_id
+  );
+};
 //
 // const create = (attributes) => {
 //   let name = attributes.name;
@@ -54,5 +53,5 @@ const all = () => {
 // };
 
 module.exports = {
-  all
+  all, find
 }

@@ -3,7 +3,7 @@ var router = express.Router();
 
 const Meal = require('../../../models/meal.js')
 
-/* GET foods listing. */
+/* GET meals listing. */
 router.get('/', function(req, res, next) {
   Meal.all()
   .then((data) => {
@@ -11,15 +11,15 @@ router.get('/', function(req, res, next) {
   })
 });
 
-// /* GET single food listing. */
-// router.get('/:id', function(req, res, next) {
-//   var id = req.params.id;
-//
-//   Food.find(id)
-//   .then((data) => {
-//     res.status(200).json(data.rows)
-//   })
-// });
+/* GET single meal listing. */
+router.get('/:id/foods', function(req, res, next) {
+  var id = req.params.id;
+
+  Meal.find(id)
+  .then((data) => {
+    res.status(200).json(data.rows)
+  })
+});
 //
 // /* POST food. */
 // router.post('/', function(req, res, next) {
