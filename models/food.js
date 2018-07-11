@@ -8,6 +8,13 @@ const all = () => {
   );
 };
 
+const find = (food_id) => {
+  var food_id = food_id;
+  return database.raw(
+    'SELECT foods.id, foods.name, foods.calories FROM foods WHERE foods.id = ?;', food_id
+  );
+};
+
 module.exports = {
-  all
+  all, find
 }

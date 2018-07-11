@@ -7,7 +7,17 @@ const Food = require('../../../models/food.js')
 router.get('/', function(req, res, next) {
   Food.all()
   .then((data) => {
-    res.status(201).json(data.rows)
+    res.status(200).json(data.rows)
+  })
+});
+
+/* GET single food listing. */
+router.get('/:id', function(req, res, next) {
+  var id = req.params.id;
+
+  Food.find(id)
+  .then((data) => {
+    res.status(200).json(data.rows)
   })
 });
 
