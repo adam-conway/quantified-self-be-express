@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
 
   Food.create(attributes)
   .then((data) => {
-    res.status(200).json(data.rows)
+    res.status(200).json(data.rows[0])
   })
 });
 
