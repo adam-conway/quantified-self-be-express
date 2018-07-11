@@ -42,4 +42,14 @@ router.put('/:id', function(req, res, next) {
   })
 });
 
+/* UPDATE food. */
+router.delete('/:id', function(req, res, next) {
+  var id = req.params.id;
+
+  Food.remove(id)
+  .then((data) => {
+    res.status(200).json(data.rows[0])
+  })
+});
+
 module.exports = router;
