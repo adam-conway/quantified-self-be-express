@@ -33,4 +33,14 @@ router.post('/:meal_id/foods/:food_id', function(req, res, next) {
   })
 });
 
+router.delete('/:meal_id/foods/:food_id', function(req, res, next) {
+  var meal_id = req.params.meal_id;
+  var food_id = req.params.food_id;
+
+  MealFood.remove(meal_id, food_id)
+  .then((data) => {
+    res.status(200).json(data.rows)
+  })
+});
+
 module.exports = router;
