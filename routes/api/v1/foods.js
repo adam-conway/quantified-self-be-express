@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var pry = require('pryjs')
 
 const Food = require('../../../models/food.js')
 
@@ -57,7 +58,8 @@ router.get('/:id/recipes', function(req, res, next) {
   var id = req.params.id;
   Food.find(id)
   .then((data) => {
-    res.status(200).json(data.rows)
+    var foodName = data.rows[0].name;
+    Food.get_recipes(foodName)
   })
 
 });
