@@ -56,12 +56,13 @@ router.delete('/:id', function(req, res, next) {
 /* GET Yummly recipes food. */
 router.get('/:id/recipes', function(req, res, next) {
   var id = req.params.id;
+
   Food.find(id)
     .then((food) => {
-      Food.get_recipes(food)
+      return Food.get_recipes(food)
     })
     .then((data) => {
-      
+      res.json({'recipes': data})
     })
 });
 

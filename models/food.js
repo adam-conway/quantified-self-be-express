@@ -42,16 +42,17 @@ const remove = (id) => {
   );
 };
 
-const get_recipes = (food) => {
-  var name = food.rows[0].name;
-
-  fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=banana&maxResult=10`, {
+const get_recipes = (id) => {
+  return fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=banana&maxResult=10`, {
     headers: {'Content-Type': 'application/json'}
   })
     .then((response) => {
       return response.json()
     })
     .then((recipes) => {
+      return recipes.matches.map((recipe) => {
+        return { name: recipe.recipeName, url: `http://www.yummly.com/recipe/${recipe.id}` }
+      })
     })
 };
 
