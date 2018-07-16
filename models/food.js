@@ -1,6 +1,9 @@
 const environment = process.env.NODE_ENV || 'development'
 const configuration = require('../knexfile')[environment]
 const database = require('knex')(configuration)
+var pry = require('pryjs')
+var express = require('express');
+require('isomorphic-fetch');
 
 const all = () => {
   return database.raw(
@@ -39,6 +42,35 @@ const remove = (id) => {
   );
 };
 
+const get_recipes = (id) => {
+  return fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=banana&maxResult=10`, {
+    headers: {'Content-Type': 'application/json'}
+  })
+    .then((response) => {
+      return response.json()
+    })
+    .then((recipes) => {
+      return recipes.matches.map((recipe) => {
+        return { name: recipe.recipeName, url: `http://www.yummly.com/recipe/${recipe.id}` }
+      })
+    })
+};
+
+function handleResponse(response) {
+  return response.json()
+    .then((json) => {
+      if (!response.ok) {
+        const error = {
+          status: response.status,
+          statusText: response.statusText,
+          json
+        }
+        return Promise.reject(error)
+      }
+      return json
+    })
+}
+
 module.exports = {
-  all, find, create, update, remove
+  all, find, create, update, remove, get_recipes
 }
