@@ -42,8 +42,9 @@ const remove = (id) => {
   );
 };
 
-const get_recipes = (id) => {
-  return fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=banana&maxResult=10`, {
+const get_recipes = (food) => {
+  var name = food.rows[0].name;
+  return fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=${name}&maxResult=10`, {
     headers: {'Content-Type': 'application/json'}
   })
     .then((response) => {
