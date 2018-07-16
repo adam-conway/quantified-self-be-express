@@ -60,21 +60,9 @@ router.get('/:id/recipes', function(req, res, next) {
     .then((food) => {
       Food.get_recipes(food)
     })
-    .then((recipes) => {
-      eval(pry.it)
+    .then((data) => {
+      
     })
-  // .then((data) => {
-  //   var foodName = data.rows[0].name
-  //   fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=${foodName}&maxResult=10`)
-  // })
-  // .then((data) = {
-  //   eval(pry.it)
-  // })
-  // Food.get_recipes(id)
-  // .then((data) => {
-  //   res.status(200).json(data.rows[0])
-  // })
-
 });
 
 module.exports = router;
