@@ -39,6 +39,24 @@ const remove = (id) => {
   );
 };
 
+const get_recipes = (food_id) => {
+  var food_id = food_id;
+  return database.raw(
+    'SELECT foods.name FROM foods WHERE foods.id = ?;', food_id
+  );
+  fetch('http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    discussionName: 'Foo',
+    totalPoints: 100,
+  })
+})
+  return database.raw(
+    'SELECT foods.id, foods.name, foods.calories FROM foods WHERE foods.id = ?;', food_id
+  );
+};
+
 module.exports = {
-  all, find, create, update, remove
+  all, find, create, update, remove, get_recipes
 }

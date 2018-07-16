@@ -52,4 +52,14 @@ router.delete('/:id', function(req, res, next) {
   })
 });
 
+/* GET Yummly recipes food. */
+router.get('/:id/recipes', function(req, res, next) {
+  var id = req.params.id;
+  Food.find(id)
+  .then((data) => {
+    res.status(200).json(data.rows)
+  })
+
+});
+
 module.exports = router;
