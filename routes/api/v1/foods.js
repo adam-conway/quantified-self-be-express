@@ -61,6 +61,9 @@ router.get('/:id/recipes', function(req, res, next) {
     var foodName = data.rows[0].name;
     Food.get_recipes(foodName)
   })
+  .then((data) => {
+    res.status(200).json(data.rows[0])
+  })
 
 });
 
