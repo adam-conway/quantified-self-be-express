@@ -12,7 +12,7 @@ const all = () => {
              foods.name,
              foods.calories,
              COUNT(foods.id) AS timesEaten,
-             json_agg(json_build_object('mealsWhenEaten', meals.name)) AS meals
+             array_agg(DISTINCT(meals.name)) AS meals
           FROM foods
           JOIN meal_foods ON foods.id = meal_foods.food_id
           JOIN meals ON meals.id = meal_foods.meal_id
