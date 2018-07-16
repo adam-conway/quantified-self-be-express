@@ -58,11 +58,11 @@ router.get('/:id/recipes', function(req, res, next) {
   var id = req.params.id;
   Food.find(id)
   .then((data) => {
-    var foodName = data.rows[0].name;
-    Food.get_recipes(foodName)
+    var foodName = data.rows[0].name
+    fetch(`http://api.yummly.com/v1/api/recipes?_app_id=ce293de6&_app_key=d48c3172a1d1d6d3f97b3faf5ad6fd33&q=${foodName}&maxResult=10`)
   })
-  .then((data) => {
-    res.status(200).json(data.rows[0])
+  .then((data) = {
+    eval(pry.it)
   })
 
 });
