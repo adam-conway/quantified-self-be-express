@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const FavoriteFood = require('../../../models/favorites.js')
+const FavoriteFood = require('../../../models/favorite_food.js')
 
 /* GET favorite foods listing. */
 router.get('/', function(req, res, next) {
