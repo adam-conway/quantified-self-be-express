@@ -9,7 +9,8 @@ const all = () => {
         FROM meal_foods
         LEFT JOIN foods ON meal_foods.food_id = foods.id
         GROUP BY foods.id
-        ORDER BY timesEaten;`
+        HAVING count(foods.id) > 0
+        ORDER BY timesEaten DESC;`
   );
 };
 
