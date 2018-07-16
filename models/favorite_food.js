@@ -4,13 +4,32 @@ const database = require('knex')(configuration)
 
 const all = () => {
   return database.raw(
+    // `SELECT timesEaten,
+    //     COALESCE(json_agg(json_build_object('name', foods.name, 'calories', foods.calories, 'mealsWhenEaten', meals.name)) FILTER (WHERE foods.id IS NOT NULL), '[]') AS foods
+    //     FROM (
+    //       SELECT foods.name,
+    //                       foods.calories,
+    //                       count(foods.id) AS timesEaten
+    //       FROM foods
+    //       LEFT JOIN meal_foods ON foods.id = meal_foods.food_id
+    //       GROUP BY foods.id
+    //       ORDER BY timesEaten DESC
+    //     ) timesEaten
+    //     GROUP BY timesEaten
+    //     HAVING timesEaten > 0
+    //     ORDER BY timesEaten DESC;`
     `SELECT timesEaten,
-            json_agg(json_build_object('name', name, 'calories', calories)) AS foods
+            json_agg(json_build_object('name', name, 'calories', calories, 'mealsWhenEaten', meals)) AS foods
      FROM
          (
-           SELECT DISTINCT foods.name, foods.calories, COUNT(foods.id) AS timesEaten
+           SELECT
+              foods.name,
+              foods.calories,
+              COUNT(foods.id) AS timesEaten,
+              json_agg(json_build_object('mealsWhenEaten', meals.name)) AS meals
            FROM foods
            JOIN meal_foods ON foods.id = meal_foods.food_id
+           JOIN meals ON meals.id = meal_foods.meal_id
            GROUP BY foods.id
            ORDER BY timesEaten DESC
          ) connectingStuffs
